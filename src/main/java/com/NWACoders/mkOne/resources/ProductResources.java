@@ -33,12 +33,24 @@ public class ProductResources {
     public ResponseEntity<Products> addProduct(@RequestBody Products products){
         //create a new product with information added to it
         Products newProduct = productServices.addNewProduct(products);
+        if(newProduct.getDescription() == null || newProduct.getDescription().isEmpty()
+                || newProduct.getProductName() == null || newProduct.getProductName().isEmpty()
+                || newProduct.getProductImage() == null || newProduct.getProductImage().isEmpty()
+                || Float.toString(newProduct.getPrice()) == null || Float.toString(newProduct.getPrice()).isEmpty()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Products> editExistingProduct(@RequestBody Products products){
         Products updatedProduct = productServices.updateExistingProduct(products);
+        if(updatedProduct.getDescription() == null || updatedProduct.getDescription().isEmpty()
+                || updatedProduct.getProductName() == null || updatedProduct.getProductName().isEmpty()
+                || updatedProduct.getProductImage() == null || updatedProduct.getProductImage().isEmpty()
+                || Float.toString(updatedProduct.getPrice()) == null || Float.toString(updatedProduct.getPrice()).isEmpty()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 

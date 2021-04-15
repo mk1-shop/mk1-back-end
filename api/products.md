@@ -24,11 +24,11 @@ Returns an array of products from the database
 }]``
 
 
-Post: products/create
+Post: products/add
 
 Accepts a json object to create a task
 
-``{"id": 8a98dfua8,
+``{
 "productName": "Apple Macbook",
 "description": "cool computer",
 "price": 10.00,
@@ -59,9 +59,9 @@ Accepts a json object to update a task
 "productImage", "https://google.com/logo"
 }``
 
-Delete: products/delete
+Delete: products/delete/{id}
 
-Accepts a json object to delete a task
+Accepts an id integer to delete a task
 
 ``{
 "id": "603ee429a300d741ff6550eb"
