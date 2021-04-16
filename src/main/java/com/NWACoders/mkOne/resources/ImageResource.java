@@ -29,7 +29,11 @@ public class ImageResource {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Images> addNewImage(Images image){
+    public ResponseEntity<Images> addNewImage(@RequestBody Images image){
+        if(image.getImageName() == null || image.getImageName().isEmpty()
+                || Float.toString(image.getSize()) == null || Float.toString(image.getSize()).isEmpty() ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         //setting up a unique id for the image added
         image.setImageCode(UUID.randomUUID().toString());
         Images newImage = imagesService.addNewImage(image);
@@ -38,7 +42,11 @@ public class ImageResource {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Images> updateExistingImage(Images images){
+    public ResponseEntity<Images> updateExistingImage(@RequestBody Images images){
+        if(images.getImageName() == null || images.getImageName().isEmpty()
+                || Float.toString(images.getSize()) == null || Float.toString(images.getSize()).isEmpty() ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         Images updatedImage = imagesService.updateImage(images);
         return new ResponseEntity<>(updatedImage, HttpStatus.OK);
     }
