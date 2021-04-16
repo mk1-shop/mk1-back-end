@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//This is the service that will communicate with the front end
+
 @Service
 public class ProductServices {
 

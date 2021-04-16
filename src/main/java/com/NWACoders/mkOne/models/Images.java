@@ -1,9 +1,8 @@
 package com.NWACoders.mkOne.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jdk.jfr.DataAmount;
+
+import javax.persistence.*;
 
 @Entity
 public class Images {
@@ -12,32 +11,34 @@ public class Images {
     @GeneratedValue
     private int id;
     //will be a uuid
-    private String imageCode;
+
+//    private String imageCode;
 
     //auto generated from?
-    private String imageName;
+    private String name;
 
-    //max size?
+    //max size 5MB
+//    @DataAmount("5MB")
     private Float size;
 
     public int getId(){
         return this.id;
     }
 
-    public String getImageCode() {
-        return imageCode;
-    }
+//    public String getImageCode() {
+//        return imageCode;
+//    }
+//
+//    public void setImageCode(String imageCode) {
+//        this.imageCode = imageCode;
+//    }
 
-    public void setImageCode(String imageCode) {
-        this.imageCode = imageCode;
-    }
-
-    public String getImageName() {
-        return imageName;
+    public String getName() {
+        return name;
     }
 
     public void setImageName(String imageName) {
-        this.imageName = imageName;
+        this.name = name;
     }
 
     public Float getSize() {

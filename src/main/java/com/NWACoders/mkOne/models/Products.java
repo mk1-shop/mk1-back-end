@@ -13,20 +13,20 @@ public class Products {
     @GeneratedValue
     private int id;
 
-    private String productName;
+    private String name;
     private String description;
     private float price;
 
     //Add validation for productImage
-    private String productImage;
+    private String image;
 
 
     public int getId() {
         return id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
@@ -37,12 +37,12 @@ public class Products {
         return price;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getImage() {
+        return image;
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        this.name = name;
     }
 
     public void setDescription(String description) {
@@ -54,17 +54,17 @@ public class Products {
     }
 
     public void setProductImage(String productImage) {
-        this.productImage = productImage;
+        this.image = image;
     }
 
     @Override
     public String toString() {
         return "Products{" +
                 "id=" + id +
-                ", productName='" + productName + '\'' +
+                ", productName='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", productImage='" + productImage + '\'' +
+                ", productImage='" + image + '\'' +
                 '}';
     }
 }

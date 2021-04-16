@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.UUID;
 
 @RestController
@@ -28,14 +29,24 @@ public class ImageResource {
        return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Images> addNewImage(@RequestBody Images image){
-        if(image.getImageName() == null || image.getImageName().isEmpty()
-                || Float.toString(image.getSize()) == null || Float.toString(image.getSize()).isEmpty() ){
+    @GetMapping("find/{id}")
+    public  ResponseEntity<Images> findImageById(@PathVariable("id") int id){
+        if(imagesService.findImageById(id) == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        //setting up a unique id for the image added
-        image.setImageCode(UUID.randomUUID().toString());
+        Images foundImage = imagesService.findImageById(id);
+        return new ResponseEntity<>(foundImage, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Images> addNewImage(@RequestBody Images image){
+//        if(image.getImageName() == null || image.getImageName().isEmpty()
+//                || Float.toString(image.getSize()) == null || Float.toString(image.getSize()).isEmpty()
+//        && image.getSize() > 5.00){
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+
+//        image.setImageCode(UUID.randomUUID().toString());
         Images newImage = imagesService.addNewImage(image);
 
         return new ResponseEntity<>(newImage, HttpStatus.CREATED);
@@ -43,10 +54,12 @@ public class ImageResource {
 
     @PutMapping("/update")
     public ResponseEntity<Images> updateExistingImage(@RequestBody Images images){
-        if(images.getImageName() == null || images.getImageName().isEmpty()
+
+        if(images.getName() == null || images.getName().isEmpty()
                 || Float.toString(images.getSize()) == null || Float.toString(images.getSize()).isEmpty() ){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         Images updatedImage = imagesService.updateImage(images);
         return new ResponseEntity<>(updatedImage, HttpStatus.OK);
     }
