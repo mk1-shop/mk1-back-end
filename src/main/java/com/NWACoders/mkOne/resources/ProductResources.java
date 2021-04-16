@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("products")
+@CrossOrigin(origins = "*")
 public class ProductResources {
 
     //retrieving the services
