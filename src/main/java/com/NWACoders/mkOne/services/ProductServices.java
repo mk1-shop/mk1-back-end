@@ -1,5 +1,6 @@
 package com.NWACoders.mkOne.services;
 
+import com.NWACoders.mkOne.exceptions.ProductNotFoundException;
 import com.NWACoders.mkOne.models.Products;
 import com.NWACoders.mkOne.repos.ProductRepo;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,13 @@ public class ProductServices {
     //Method to delete existing products
     public void deletingExistingProducts(int id){
         productRepo.deleteById(id);
+    }
+
+
+    //Method for finding specific product by id
+    public Products findProductById(int id){
+        return productRepo.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("the product id of: " + id + " was not found."));
     }
 
 }
