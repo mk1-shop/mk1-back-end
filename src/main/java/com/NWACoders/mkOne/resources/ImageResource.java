@@ -24,7 +24,7 @@ public class ImageResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Iterable<Images>> getAllAvaliableImages(){
+    public ResponseEntity<Iterable<Images>> getAllAvailableImages(){
        Iterable<Images> images = imagesService.displayAllImages();
        return new ResponseEntity<>(images, HttpStatus.OK);
     }
