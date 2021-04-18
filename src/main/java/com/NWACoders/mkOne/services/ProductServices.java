@@ -26,9 +26,23 @@ public class ProductServices {
     }
 
     //Creating a function that retrieves all products from the database
-    public Iterable<Products> displayAllProducts() {
-        Sort sort = Sort.by("id").descending();
-        return productRepo.findAll(sort);
+    public Iterable<Products> displayAllProducts(String direction,String orderBy) {
+        Sort sort;
+        if (direction == null || orderBy == null){
+            return productRepo.findAll();
+        }else{
+            switch(direction){
+                case "desc":
+                    sort = Sort.by(orderBy).descending();
+                    return productRepo.findAll(sort);
+                case "asc":
+                    sort = Sort.by(orderBy).ascending();
+                    return productRepo.findAll(sort);
+                default:
+                    return productRepo.findAll();
+            }
+        }
+
     }
 
     //Updating/Editing the information inside of the database

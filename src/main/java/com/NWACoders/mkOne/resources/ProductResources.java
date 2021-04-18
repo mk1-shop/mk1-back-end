@@ -23,9 +23,9 @@ public class ProductResources {
     //when we go to this url address we want to get back a response with data
     //making th api call
     @GetMapping("/all")
-    public ResponseEntity<Iterable<Products>> getAllAvaliableProducts(){
+    public ResponseEntity<Iterable<Products>> getAllAvaliableProducts(@RequestParam(required = false) String direction,@RequestParam(required = false) String orderBy){
         //if we get a response then send the data back to the front end
-        Iterable<Products> products = productServices.displayAllProducts();
+        Iterable<Products> products = productServices.displayAllProducts(direction,orderBy);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
