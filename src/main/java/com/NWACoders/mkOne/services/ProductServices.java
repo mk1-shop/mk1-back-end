@@ -1,12 +1,14 @@
 package com.NWACoders.mkOne.services;
 
+import com.NWACoders.mkOne.exceptions.ProductNotFoundException;
 import com.NWACoders.mkOne.models.Products;
 import com.NWACoders.mkOne.repos.ProductRepo;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//This is the service that will communicate with the front end
+
 @Service
 public class ProductServices {
 
@@ -24,8 +26,23 @@ public class ProductServices {
     }
 
     //Creating a function that retrieves all products from the database
-    public Iterable<Products> displayAllProducts() {
-        return productRepo.findAll();
+    public Iterable<Products> displayAllProducts(String direction,String orderBy) {
+        Sort sort;
+        if (direction == null || orderBy == null){
+            return productRepo.findAll();
+        }else{
+            switch(direction){
+                case "desc":
+                    sort = Sort.by(orderBy).descending();
+                    return productRepo.findAll(sort);
+                case "asc":
+                    sort = Sort.by(orderBy).ascending();
+                    return productRepo.findAll(sort);
+                default:
+                    return productRepo.findAll();
+            }
+        }
+
     }
 
     //Updating/Editing the information inside of the database
@@ -36,6 +53,12 @@ public class ProductServices {
     //Method to delete existing products
     public void deletingExistingProducts(int id){
         productRepo.deleteById(id);
+    }
+
+    //Method for finding specific product by id
+    public Products findProductById(int id){
+        return productRepo.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("the product id of: " + id + " was not found."));
     }
 
 }
